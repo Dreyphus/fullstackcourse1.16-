@@ -8,17 +8,6 @@ const Button = (props) => (
 const Header = (props) => (
   <h2>{props.text}</h2>
 )
-
-//const Buttons = (props) => {
-//  return (
-//    <div>
-//      <Header text="give feedback" />
-//      <Button onClick={handleGoodClick()} text="good"/>
-//      <Button onClick={handleNeutralClick()} text="neutral"/>
-//      <Button onClick={handleBadClick()} text="bad"/>
-//    </div>
-//  )
-//}
 const StatisticLine = (props) => {
   if(props.text == "positive"){
     return(
