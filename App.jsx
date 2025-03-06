@@ -8,26 +8,38 @@ const Button = (props) => (
 const Header = (props) => (
   <h2>{props.text}</h2>
 )
+
 const StatisticLine = (props) => {
   if(props.text == "positive"){
     return(
-      <p>{props.text} {props.value}%</p>
+      <tr>
+        <td>{props.text}</td> 
+        <td>{props.value}%</td>
+      </tr>
+      
     )
   }
   return(
-    <p>{props.text} {props.value}</p>
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
   ) 
 }
 const Statistics = (props) => {
   if(props.total != 0){
     return (
       <div>
-        <StatisticLine text="good" value={props.good}/>
-        <StatisticLine text="neutral" value={props.neutral}/>
-        <StatisticLine text="bad" value={props.bad}/>
-        <StatisticLine text="all" value={props.total}/>
-        <StatisticLine text="average" value={props.average}/>
-        <StatisticLine text="positive" value={props.percentGood}/>
+        <table>
+          <tbody>
+            <StatisticLine text="good" value={props.good}/>
+            <StatisticLine text="neutral" value={props.neutral}/>
+            <StatisticLine text="bad" value={props.bad}/>
+            <StatisticLine text="all" value={props.total}/>
+            <StatisticLine text="average" value={props.average}/>
+            <StatisticLine text="positive" value={props.percentGood}/>
+          </tbody>
+        </table>
       </div>
     )
   }
@@ -51,7 +63,7 @@ const App = () => {
     setGood(newGood)
     setTotal(newTotal)
     setPercentGood(newGood / newTotal * 100)
-    setAverage(getAverage(newGood, bad))
+    setAverage(getAverage(newGood, bad, newTotal))
   }
   
   const handleNeutralClick = () => {
@@ -60,7 +72,7 @@ const App = () => {
     setNeutral(newNeutral)
     setTotal(newTotal)
     setPercentGood(good / newTotal * 100)
-    setAverage(getAverage(good, bad))
+    setAverage(getAverage(good, bad, newTotal))
   }  
   
   const handleBadClick = () => {
@@ -69,13 +81,13 @@ const App = () => {
     setBad(newBad)
     setTotal(newTotal)
     setPercentGood(good / newTotal * 100)
-    setAverage(getAverage(good, newBad))
+    setAverage(getAverage(good, newBad, newTotal))
   }
 
-  const getAverage = (g, b) => {
+  const getAverage = (g, b, t) => {
     b = b * -1
     const sum = g + b
-    const av = sum / 2
+    const av = sum / t
     return av
 }
 
